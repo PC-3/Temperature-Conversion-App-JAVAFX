@@ -2,8 +2,8 @@ This is a javafx based GUI Application which helps you convert Temperature from 
 
 FOR THE IMPORTANT CODES->
 
-Main Class:src->main->java->com->internshala->javafx_app->MyMain
+Main Class: src->main->java->com->internshala->javafx_app->MyMain
 
-Controller Class:src->main->java->com->internshala->javafx_app->Controller
+Controller Class: src->main->java->com->internshala->javafx_app->Controller
 
-App Layout:src->main->resources->com->internshala->javafx_app->app_layout.fxml
+App Layout: src->main->resources->com->internshala->javafx_app->app_layout.fxml
