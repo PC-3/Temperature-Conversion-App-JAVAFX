@@ -1,0 +1,96 @@
+package com.internshala.javafx_app;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Optional;
+
+public class MyMain extends Application {
+
+	public static void main(String[] args) {
+
+		System.out.println("Main");
+
+		launch();
+	}
+
+	@Override
+	public void init() throws Exception {//OPTIONAL
+		System.out.println("init");
+		super.init();
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws IOException {
+
+		System.out.println("Start");
+
+		FXMLLoader loader = new FXMLLoader(MyMain.class.getResource("app_layout.fxml"));
+		VBox rootNode = loader.load();
+
+		MenuBar menuBar=createMenu();
+		rootNode.getChildren().add(0,menuBar);
+
+		Scene scene = new Scene(rootNode);
+
+		primaryStage.setTitle("Temperature Converter Tool");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	private MenuBar createMenu(){
+
+		Menu fileMenu=new Menu("File");
+		MenuItem newMenuItem=new MenuItem("New");
+
+		newMenuItem.setOnAction(actionEvent -> {
+			System.out.println("New Menu item clicked");
+		});
+
+		SeparatorMenuItem separatorMenuItem=new SeparatorMenuItem();
+
+		MenuItem quitMenuItem=new MenuItem("Quit");
+		fileMenu.getItems().addAll(newMenuItem,separatorMenuItem,quitMenuItem);
+
+		quitMenuItem.setOnAction(event -> {
+			Platform.exit();//shuts down the application
+			System.exit(0);//shuts down the virtual machine
+		});
+
+		Menu helpMenu=new Menu("Help");
+		MenuItem aboutApp=new MenuItem("About");
+		helpMenu.getItems().addAll(aboutApp);
+
+		aboutApp.setOnAction(actionEvent -> aboutApp());
+
+		MenuBar menuBar=new MenuBar();
+		menuBar.getMenus().addAll(fileMenu,helpMenu);
+
+		return menuBar;
+
+	}
+
+	private void aboutApp() {
+		Alert alertDialog=new Alert(Alert.AlertType.INFORMATION);
+		alertDialog.setTitle("About App");
+		alertDialog.setHeaderText("App Description");
+		alertDialog.setContentText("This app helps you convert temperature from Celsius to Fahrenheit or vice-versa.it is upto your choice.\nCredits:Paarth Chandan");
+		alertDialog.show();
+
+		ButtonType okBtn=new ButtonType("OK");
+
+		alertDialog.getButtonTypes().setAll(okBtn);
+	}
+
+	@Override
+	public void stop() throws Exception {//OPTIONAL
+		System.out.println("Stop");
+		super.stop();
+	}
+}
